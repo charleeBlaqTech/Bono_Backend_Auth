@@ -6,15 +6,25 @@ const User =require('../models/userModel')
 
 
 const CheckUser= async (bodyData)=>{
-        const userEmail     = bodyData.email;
-        const userGoogleId  = bodyData.googleID;
+        const email    = bodyData.email;
 
-        const verifyUser= await User.findOne({email: userEmail} || {googleID: userGoogleId})
+        const verifyUser= await User.findOne({email});
         if(verifyUser){
             return verifyUser
         }else{
             return false
         }
+}
+
+
+const otpGenerator= async()=>{
+
+    let minNumb= 100000;
+    let maxNumb= 999999;
+
+    const otp= await Math.floor(Math.random() * (maxNumb - minNumb + 1)) + minNumb;
+    return otp
+
 }
 
 
@@ -25,4 +35,4 @@ const CheckUser= async (bodyData)=>{
 
 
 
-module.exports= CheckUser
+module.exports= {otpGenerator,CheckUser}

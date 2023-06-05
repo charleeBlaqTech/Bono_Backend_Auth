@@ -10,40 +10,23 @@ const authorizeUser     = require("../middlewares/authUsers")
 
 
 // ============USER SIGNUP WITH FORM DATA, COOKIE-PARSER AND JWT===========
-router.get('/login',(req, res)=>{
-    res.render('login')
-});
-router.get('/signup',(req, res)=>{
-    res.render('signup')
-});
-router.get('/home',authorizeUser,(req, res)=>{
-    const userEmail= req.user.email;
-    res.render('home',{userEmail})
-});
-router.get('/admin',authorizeUser,(req, res)=>{
-
-    const userEmail= req.user.email;
-    res.render('dashboard')
-});
-
-
-
 
 // =================POST ROUTE TO LOGIN USER WITH FORM DATA==============
-router.post('/login',homeControllers.loginUser);
+router.route('/login').get(homeControllers.loginPage).post(homeControllers.loginUser);
 
 // =================POST ROUTE TO SIGNUP USER WITH FORM DATA=============
-router.post('/signup',homeControllers.registerUser);
+router.route('/signup').get(homeControllers.signupPage).post(homeControllers.registerUser);
 
 // =================POST route for completing SIGNUP PROCESS=============
+router.route('/verify').get(homeControllers.otpVerificationPage).post(homeControllers.verifyOtp)
+
 router.route('/signup/complete').get(authorizeUser,homeControllers.completeRegistrationPage).post(authorizeUser,homeControllers.completeRegistration)
 
 // =================POST ROUTE TO UPDATE USER PASSWORD WITH FORM DATA====
-router.post('/password/new',authorizeUser,homeControllers.resetPassword);
-
+router.route('/password/new').get(authorizeUser,homeControllers.newPasswordPage).post(authorizeUser,homeControllers.resetPassword);
 
 // =================Get ROUTE TO LOGOUT USER=============================
-router.get('/logout',homeControllers.logoutUser);
+router.get('/logout',authorizeUser,homeControllers.logoutUser);
 
 // =========== SIGNUP ROUTE TO GOOGLE API==========================================
 router.get('/auth/google', passport.authenticate('google',{scope: ['email', 'profile']}));

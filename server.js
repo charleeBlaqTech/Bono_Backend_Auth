@@ -1,7 +1,9 @@
 const express           = require("express");
 const exphbs            = require('express-handlebars')
 const config            = require("config")
-const mongoose          = require('mongoose')
+const mongoose          = require('mongoose');
+const nodeMailer        =require('nodemailer')
+const mailGunTransport  =require('nodemailer-mailgun-transport')
 const cors              = require('cors');
 const bcrypt            = require('bcrypt');
 const jwt               = require('jsonwebtoken');
@@ -12,7 +14,7 @@ const session           = require("express-session");
 // const MongoStore        = require('connect-mongo')(session)
 const fileUpload        = require('express-fileupload');
 const connectToDb       = require("./dbconnection/connectDB")
-const homeRoutes        = require('./routes/homeRoutesRouter')
+const userAuthRoutes        = require('./routes/homeRoutesRouter')
 
 
 
@@ -50,7 +52,7 @@ app.engine("hbs",exphbs.engine({
 app.set("view engine", "hbs")
 
 // ==========Home routes are all routes that have / + route names=================
-app.use('/', homeRoutes);
+app.use('/', userAuthRoutes);
 
 
 

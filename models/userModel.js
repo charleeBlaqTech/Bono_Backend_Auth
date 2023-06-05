@@ -8,7 +8,6 @@ const Schema = mongoose.Schema;
 const userSchema= new Schema({
     googleID:{
         type:String,
-        unique: true,
     },
     isEmailVerified:{
         type:Boolean,
@@ -16,8 +15,8 @@ const userSchema= new Schema({
         required:true
     },
     otpToken:{
-        type:String,
-        default: null
+        type:Number,
+        default:null
     },
     firstname:{
         type:String,

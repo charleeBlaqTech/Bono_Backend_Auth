@@ -4,7 +4,8 @@ const config        = require("config")
 const bcrypt        = require('bcrypt');
 const jwt           = require('jsonwebtoken');
 const User          = require('../models/userModel');
-const CheckUser     = require('../config/helperFn')
+const {CheckUser,otpGenerator }    = require('../config/helperFn');
+const sendOtpToEmail= require('../config/otpSenderFn')
 
 
 
@@ -13,7 +14,9 @@ const CheckUser     = require('../config/helperFn')
 
 
 // =================LOGIN EXISTING USER================================
-
+const loginPage=(req, res)=>{
+    res.status(200)//render login page
+}
 const loginUser=async (req, res)=>{
     try{
         const verifyUser= await CheckUser(req.body)
@@ -41,37 +44,53 @@ const loginUser=async (req, res)=>{
 }
 
 
-//==================REGISTER NEW USER===================================
 
+//==================REGISTER NEW USER===================================
+const signupPage= (req, res)=>{
+    res.status(200)//render signup page
+}
 const registerUser=async(req, res)=>{ 
     try{
         const {firstname, lastname,password,confirmedPassword, email, phone}=req.body;
        
-        if(password.length < 8){
+        if(String(password).length < 8){
             res.status(400).json({message: "password must be equal or more than 8 letters"});
-        }else if(password.length >= 8){
+        }else if(String(password).length >= 8){
             if(password !== confirmedPassword){
                 res.status(400).json({status:400, message: "password not matched"})
             }else{
-                if(String(firstname) && String(lastname) && String(email) && String(password) && phone){
+                if(String(firstname) && String(lastname) && String(email) && String(password) && Number(phone)){
     
                     const checkUserExist= await User.findOne({email:email});
                     if(checkUserExist){
                         res.status(400).json({status:400, message: "User with this email already exist"})
                     }else{
-                        // ====email otp send========
-    
-    
+                        // ====generated six digit  otp ========
+                        const otp = await otpGenerator();
+                        
+
                         const newUser= await User.create({
                             firstname:      firstname.toLowerCase(),
                             lastname:       lastname.toLowerCase(),
                             email:          email.toLowerCase(),
                             password:       password.toLowerCase(),
-                            phone:          Number(phone)
+                            phone:          Number(phone),
+                            otpToken:       Number(otp)
                         })
-        
-                        res.status(201).json({data: newUser, status:201, message: "Your Account was created Successfully"});
-                        res.redirect('/signup/complete')
+                        
+                        const otpSentSuccess= await sendOtpToEmail(newUser.email, otp);
+                        
+                        if(otpSentSuccess.status === 200){
+                            res.status(200).redirect('/verify');
+                        }else{
+                            await User.findByIdAndDelete(newUser._id).then((response)=>{
+                                res.redirect('/register').json({ status:404, message: "verification unsuccessful"});
+                                
+                            });
+                           
+                        }
+
+                        
                     }
                     
                 }else{
@@ -80,24 +99,43 @@ const registerUser=async(req, res)=>{
             }
         }
         
-
-        
-       
     }catch(error){
-        res.status(400).json({status:400, message: error});
+        res.status(400).json({status:400, message: error.message});
     }
    
 }
 
+
+
+
+//=================VERIFY USER OTP=====================================
+const otpVerificationPage=(req,res)=>{
+    res.status(200).json({message:"this will be the verification page for otp"})//render otp verification page
+}
+const verifyOtp=async (req,res)=>{
+
+    const userOtp= req.body.otpToken;
+    const checkUserExist= await User.findOne({otpToken:Number(userOtp)});
+                    if(!checkUserExist){
+                        res.status(400).json({status:400, message: "User details not found"})
+                    }else{
+                        const secret = config.get('secret_token');
+                        const verifiedUserId= checkUserExist._id;
+                        const accessToken= await jwt.sign(({verifiedUserId}), secret,{expiresIn: 300}); 
+
+                        checkUserExist.isEmailVerified= true;
+                        checkUserExist.otpToken= null;
+                        checkUserExist.save();
+
+                        res.cookie('auth',accessToken,{maxAge:300000, httpOnly: true, sameSite: "lax"})
+                        res.status(200).json({ status:200, message: "Email account verified successfully"});
+                        
+                    }
+}
+
 //==================NEW USER UPDATE REGISTRATION FORM===================================
-const completeRegistrationPage=(req, res)=>{
-    const userEmail= req.user.email;
-    if(userEmail){
-        res.status(200).json({status:200, message: "authenticated"});
-    }else{
-        res.status(404).json({status:404, message: "unAuthorized"});
-    }
-    
+const completeRegistrationPage=(req,res)=>{
+    res.status(200).json({message:"this will be the complete signup page"})//render other user account details page
 }
 
 const completeRegistration=async(req, res)=>{ 
@@ -129,39 +167,11 @@ const completeRegistration=async(req, res)=>{
    
 }
 
-// =================LOGIN AND REGISTER USER WITH GOOGLE OAUTH===========
-
-const googleLoginCallBack= async (req, res)=>{
-    const secret = config.get('secret_token');
-    const verifiedUserId= req.user._id;
-    const accessToken= await jwt.sign(({verifiedUserId}), secret,{expiresIn: 300});         
-    res.cookie('auth',accessToken,{maxAge:300000, httpOnly: true, sameSite: "lax"})
-    res.redirect('/signup/complete');
-}
-
-// =================verifying current user with otp to authorize change of password=====
-
-const verifyCurrentUser= async(req, res)=>{
-    try {
-        const userEmail= req.body.email;
-        if(!userEmail){
-            res.status(400).json({message: "email can not be empty"});
-        }else{
-            const verifyUser= await user.findOne({email: userEmail});
-            if(!verifyUser){
-                res.status(400).json({message: "a user with this email does not exist"});
-            }else{
-                // otp will be sent to the email........
-            }
-
-        }
-    } catch (error) {
-        
-    }
-}
-
 
 // =================NEW PASSWORD RESET======================================
+const newPasswordPage=(req,res)=>{
+    res.status(200) //render new password input page
+}
 const resetPassword=async(req, res)=>{
     try {
         const currentUserId   = req.user._id
@@ -196,6 +206,18 @@ const resetPassword=async(req, res)=>{
     }
 }
 
+
+// =================LOGIN AND REGISTER USER WITH GOOGLE OAUTH===========
+
+const googleLoginCallBack= async (req, res)=>{
+    const secret = config.get('secret_token');
+    const verifiedUserId= req.user._id;
+    const accessToken= await jwt.sign(({verifiedUserId}), secret,{expiresIn: 300});         
+    res.cookie('auth',accessToken,{maxAge:300000, httpOnly: true, sameSite: "lax"})
+    res.redirect('/signup/complete');
+}
+
+
 //==================LOG OUT USER========================================
 
 const logoutUser= async (req, res)=>{
@@ -213,9 +235,9 @@ const logoutUser= async (req, res)=>{
 
 
 
-module.exports={loginUser,registerUser,completeRegistrationPage,
-                completeRegistration,resetPassword,verifyCurrentUser,
-                logoutUser, googleLoginCallBack
+module.exports={loginUser,loginPage,signupPage,newPasswordPage,registerUser,completeRegistrationPage,
+                completeRegistration,resetPassword,
+                logoutUser,otpVerificationPage, googleLoginCallBack,verifyOtp
                 }
    
 

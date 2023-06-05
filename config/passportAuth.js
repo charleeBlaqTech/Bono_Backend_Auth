@@ -5,7 +5,7 @@ const config= require("config")
 const mongoose= require('mongoose');
 const bcrypt= require('bcrypt');
 const User =require('../models/userModel');
-const CheckUser =require('./helperFn')
+const {CheckUser} =require('./helperFn')
 
 
 
@@ -27,7 +27,8 @@ const authPassport=(passport)=>{
             firstname:profile.name.familyName.toLowerCase(),
             lastname:profile.name.givenName.toLowerCase(),
             email: profile.emails[0].value.toLowerCase(),
-            googleUserImage:profile.photos[0].value
+            googleUserImage:profile.photos[0].value,
+            isEmailVerified: true
         }
         try {
             // const checkUserExistence= await User.findOne({googleID:profile.id});
