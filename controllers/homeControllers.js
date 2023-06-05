@@ -20,7 +20,8 @@ const loginPage=(req, res)=>{
 const loginUser=async (req, res)=>{
     try{
         const verifyUser= await CheckUser(req.body)
-        if(verifyUser){
+        
+        if(verifyUser.isEmailVerified === true){
             const passwordVerify= await bcrypt.compareSync(req.body.password.toLowerCase(), verifyUser.password)
             if(passwordVerify === true){
 
@@ -36,7 +37,7 @@ const loginUser=async (req, res)=>{
             }
             
         }else{
-            res.status(404).json({status: 404, message: "The User With This Email not found"});
+            res.status(404).json({status: 404, message: "The User With This Email not found or not verified"});
         }
     }catch(error){
         res.status(400).json({status:400, message: error.message})
