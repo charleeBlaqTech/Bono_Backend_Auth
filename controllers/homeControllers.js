@@ -84,7 +84,7 @@ const registerUser=async(req, res)=>{
                         const otpSentSuccess= await sendOtpToEmail(newUser.email, otp);
                         
                         if(otpSentSuccess.status === 200){
-                            res.status(200).redirect('/verify');
+                            res.status(200).redirect('/customer/verify-otp');
                         }else{
                             await User.findByIdAndDelete(newUser._id).then((response)=>{
                                 res.redirect('/customer/register').json({ status:404, message: "verification unsuccessful"});
