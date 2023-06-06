@@ -9,6 +9,16 @@ const authorizeUser     = require("../middlewares/authUsers")
 
 
 
+
+
+
+
+
+
+//welcome note===============
+router.get('/', homeControllers.homeResponse)
+
+
 // ============USER SIGNUP WITH FORM DATA, COOKIE-PARSER AND JWT===========
 
 // =================POST ROUTE TO LOGIN USER WITH FORM DATA==============

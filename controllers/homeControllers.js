@@ -12,10 +12,12 @@ const sendOtpToEmail= require('../config/otpSenderFn')
 
 
 
-
+const homeResponse=(req,res)=>{
+    res.status(200).json({message: "WELCOME TO BONO OIL SERVICES USER AUTHENTICATION AND AUTHORIZATION BACKEND ENDPOINTS....READ DOCS FOR ENDPOINT ROUTS NEEDED TO MAKE API CALLS..... THANKS"})
+}
 // =================LOGIN EXISTING USER================================
 const loginPage=(req, res)=>{
-    res.status(200)//render login page
+    res.status(200).json({message: "The login page will be displayed by this route"})//render login page
 }
 const loginUser=async (req, res)=>{
     try{
@@ -48,7 +50,7 @@ const loginUser=async (req, res)=>{
 
 //==================REGISTER NEW USER===================================
 const signupPage= (req, res)=>{
-    res.status(200)//render signup page
+    res.status(200).json({message: "The signup form page will be displayed by this route"})//render signup page
 }
 const registerUser=async(req, res)=>{ 
     try{
@@ -171,7 +173,7 @@ const completeRegistration=async(req, res)=>{
 
 // =================NEW PASSWORD RESET======================================
 const newPasswordPage=(req,res)=>{
-    res.status(200) //render new password input page
+    res.status(200).json({message: "The new password form page will be displayed by this route"}) //render new password input page
 }
 const resetPassword=async(req, res)=>{
     try {
@@ -236,7 +238,7 @@ const logoutUser= async (req, res)=>{
 
 
 
-module.exports={loginUser,loginPage,signupPage,newPasswordPage,registerUser,completeRegistrationPage,
+module.exports={homeResponse,loginUser,loginPage,signupPage,newPasswordPage,registerUser,completeRegistrationPage,
                 completeRegistration,resetPassword,
                 logoutUser,otpVerificationPage, googleLoginCallBack,verifyOtp
                 }
