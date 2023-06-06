@@ -13,7 +13,7 @@ const sendOtpToEmail= require('../config/otpSenderFn')
 
 
 const homeResponse=(req,res)=>{
-    res.status(200).json({message: "WELCOME TO BONO OIL SERVICES USER AUTHENTICATION AND AUTHORIZATION BACKEND ENDPOINTS....READ DOCS FOR ENDPOINT ROUTS NEEDED TO MAKE API CALLS..... THANKS", docsLink: "https://documenter.getpostman.com/view/27827884/2s93sXeFps"})
+    res.status(200).send({message: "WELCOME TO BONO OIL SERVICES USER AUTHENTICATION AND AUTHORIZATION BACKEND ENDPOINTS....READ DOCS FOR ENDPOINT ROUTS NEEDED TO MAKE API CALLS..... THANKS", docsLink: "https://documenter.getpostman.com/view/27827884/2s93sXeFps"})
 }
 const loginPage=(req, res)=>{
     res.status(200).json({message: "The login page will be displayed by this route"})//render login page
