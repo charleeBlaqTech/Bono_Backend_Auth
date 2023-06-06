@@ -19,7 +19,7 @@ const authPassport=(passport)=>{
         new GoogleStrategy({
         clientID:       google_client_ID,
         clientSecret:   google_client_secret,
-        callbackURL:    "http://localhost:1900/auth/google/callback"
+        callbackURL:    "https://bono-auth-endpoints.onrender.com/auth/google/callback"
     }, 
     async (accessToken, refreshToken, profile, callbackFn)=>{
         const newUserData = {
@@ -40,7 +40,7 @@ const authPassport=(passport)=>{
                 callbackFn(null, newUser)
             }
         } catch (error) {
-            console.log(error)
+            console
         }
        
     })
