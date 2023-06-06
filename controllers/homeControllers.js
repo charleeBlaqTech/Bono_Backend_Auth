@@ -15,10 +15,11 @@ const sendOtpToEmail= require('../config/otpSenderFn')
 const homeResponse=(req,res)=>{
     res.status(200).json({message: "WELCOME TO BONO OIL SERVICES USER AUTHENTICATION AND AUTHORIZATION BACKEND ENDPOINTS....READ DOCS FOR ENDPOINT ROUTS NEEDED TO MAKE API CALLS..... THANKS"})
 }
-// =================LOGIN EXISTING USER================================
 const loginPage=(req, res)=>{
     res.status(200).json({message: "The login page will be displayed by this route"})//render login page
 }
+
+
 const loginUser=async (req, res)=>{
     try{
         const verifyUser= await CheckUser(req.body)
@@ -33,7 +34,7 @@ const loginUser=async (req, res)=>{
                 
                 res.cookie('auth',accessToken,{maxAge:300000, httpOnly: true, sameSite: "lax"})
                 
-                res.status(200).json({status: 200})
+                res.status(200).json({status: 200, message:"you have been logged in successfully"})
             }else{
                 res.status(404).json({status: 404, message: "The password Entered does not match"});
             }
@@ -45,7 +46,6 @@ const loginUser=async (req, res)=>{
         res.status(400).json({status:400, message: error.message})
     }   
 }
-
 
 
 //==================REGISTER NEW USER===================================
@@ -87,7 +87,7 @@ const registerUser=async(req, res)=>{
                             res.status(200).redirect('/verify');
                         }else{
                             await User.findByIdAndDelete(newUser._id).then((response)=>{
-                                res.redirect('/register').json({ status:404, message: "verification unsuccessful"});
+                                res.redirect('/customer/register').json({ status:404, message: "verification unsuccessful"});
                                 
                             });
                            
@@ -209,18 +209,6 @@ const resetPassword=async(req, res)=>{
     }
 }
 
-
-// =================LOGIN AND REGISTER USER WITH GOOGLE OAUTH===========
-
-const googleLoginCallBack= async (req, res)=>{
-    const secret = config.get('secret_token');
-    const verifiedUserId= req.user._id;
-    const accessToken= await jwt.sign(({verifiedUserId}), secret,{expiresIn: 300});         
-    res.cookie('auth',accessToken,{maxAge:300000, httpOnly: true, sameSite: "lax"})
-    res.redirect('/signup/complete');
-}
-
-
 //==================LOG OUT USER========================================
 
 const logoutUser= async (req, res)=>{
@@ -240,7 +228,7 @@ const logoutUser= async (req, res)=>{
 
 module.exports={homeResponse,loginUser,loginPage,signupPage,newPasswordPage,registerUser,completeRegistrationPage,
                 completeRegistration,resetPassword,
-                logoutUser,otpVerificationPage, googleLoginCallBack,verifyOtp
+                logoutUser,otpVerificationPage,verifyOtp
                 }
    
 

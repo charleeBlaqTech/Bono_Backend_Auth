@@ -14,6 +14,7 @@ const session           = require("express-session");
 const fileUpload        = require('express-fileupload');
 const connectToDb       = require("./dbconnection/connectDB")
 const userAuthRoutes        = require('./routes/homeRoutesRouter');
+const googleAuthRoutes        = require('./routes/googleAuthRouter');
 
 // const swaggerJsDoc= require('swagger-jsdoc');
 // const swaggerUi= require('swagger-ui-express');
@@ -86,7 +87,9 @@ app.use(fileUpload());
 
 
 // ==========Home routes are all routes that have / + route names=================
-app.use('/', userAuthRoutes);
+app.use('/',userAuthRoutes)
+app.use('/customer', userAuthRoutes);
+app.use('/auth/google', googleAuthRoutes);
 
 
 
