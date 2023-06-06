@@ -8,7 +8,7 @@ const User =require('../models/userModel')
 const CheckUser= async (bodyData)=>{
         const email    = bodyData.email;
 
-        const verifyUser= await User.findOne({email});
+        const verifyUser= await User.findOne({email:email});
         if(verifyUser){
             return verifyUser
         }else{
