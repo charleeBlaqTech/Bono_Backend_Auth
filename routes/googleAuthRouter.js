@@ -8,10 +8,10 @@ const authorizeUser     = require("../middlewares/authUsers")
 
 
 // =========== SIGNUP ROUTE TO GOOGLE API==========================================
-router.get('/', passport.authenticate('google',{scope: ['email', 'profile']}));
+router.get('/google', passport.authenticate('google',{scope: ['email', 'profile']}));
 
 // ============Google AUTH CALL BACK ROUTE with user data======================================
-router.get('/callback', passport.authenticate('google'), googleAuthControllers.googleLoginCallBack);
+router.get('/google/callback', passport.authenticate('google'), googleAuthControllers.googleLoginCallBack);
 
 
 

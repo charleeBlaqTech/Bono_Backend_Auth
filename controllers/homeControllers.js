@@ -109,8 +109,6 @@ const registerUser=async(req, res)=>{
 }
 
 
-
-
 //=================VERIFY USER OTP=====================================
 const otpVerificationPage=(req,res)=>{
     res.status(200).json({message:"this will be the verification page for otp"})//render otp verification page
@@ -118,7 +116,8 @@ const otpVerificationPage=(req,res)=>{
 const verifyOtp=async (req,res)=>{
 
     const userOtp= req.body.otpToken;
-    const checkUserExist= await User.findOne({otpToken:Number(userOtp)});
+    const userOtpParam= req.params.code;
+    const checkUserExist= await User.findOne({otpToken:Number(userOtp || userOtpParam)});
                     if(!checkUserExist){
                         res.status(400).json({status:400, message: "User details not found"})
                     }else{
@@ -177,12 +176,13 @@ const newPasswordPage=(req,res)=>{
 }
 const resetPassword=async(req, res)=>{
     try {
-        const currentUserId   = req.user._id
+        const currentUserId   = req.user._id;
+        const userIdParams    =req.params.id
         const newPassword     = req.body.newPassword;
         const confirmPassword = req.body. confirmedNewPassword;
 
-        if(!currentUserId){
-            res.status(404).redirect('/login')
+        if(!currentUserId && !userIdParams){
+            res.status(404).redirect('/customer/login');
         }else{
             if(newPassword.length < 8){
                 res.status(400).json({message: "password must be equal or more than 8 letters"});
@@ -191,9 +191,9 @@ const resetPassword=async(req, res)=>{
                 if(newPassword !== confirmPassword){
                     res.status(400).json({message: "passwords entered not match"})
                 }else{
-                    const currentUserDetail= await User.findOne({_id:currentUserId});
+                    const currentUserDetail= await User.findOne({_id:(currentUserId || userIdParams)});
                     if(currentUserDetail){
-                        currentUserDetail.password = newPassword;
+                        currentUserDetail.password = String(newPassword);
                         currentUserDetail.save();
                         res.status(200).json({status: 200, message: "password has been successfully updated"})
                     }else{

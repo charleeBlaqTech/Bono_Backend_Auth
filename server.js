@@ -89,7 +89,7 @@ app.use(fileUpload());
 // ==========Home routes are all routes that have / + route names=================
 app.use('/',userAuthRoutes)
 app.use('/customer', userAuthRoutes);
-app.use('/auth/google', googleAuthRoutes);
+app.use('/auth', googleAuthRoutes);
 
 
 
