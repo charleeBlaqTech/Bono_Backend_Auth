@@ -5,6 +5,7 @@ const config =require('config')
 
 const connectToDb= ()=>{
     const db_url= config.get('db_url');
+    console.log(db_url)
     return (
         mongoose.connect(db_url).then(()=>{
             console.log('database connected successfully');
