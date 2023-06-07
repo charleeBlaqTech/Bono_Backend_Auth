@@ -22,7 +22,7 @@ const sendOtpToEmail= async (email,otp)=>{
     const data={
         from: `${name} ${company_email}`,
         to:`${email}`,
-        subject:"verify your account with Bono with the One Time pin sent to Your Email",
+        subject:"verify your account with Bogo with the One Time pin sent to Your Email",
         text: `${otp}`
     }
     

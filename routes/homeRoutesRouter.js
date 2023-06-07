@@ -27,7 +27,7 @@ router.route('/login').get(homeControllers.loginPage).post(homeControllers.login
 router.route('/signup').get(homeControllers.signupPage).post(homeControllers.registerUser);
 
 // =================POST route for completing SIGNUP PROCESS=============
-router.route('/verify-otp/:code?').get(homeControllers.otpVerificationPage).post(homeControllers.verifyOtp)
+router.route('/verify-otp').get(homeControllers.otpVerificationPage).post(homeControllers.verifyOtp)
 
 router.route('/signup/complete/:id?').get(authorizeUser,homeControllers.completeRegistrationPage).post(authorizeUser,homeControllers.completeRegistration)
 
