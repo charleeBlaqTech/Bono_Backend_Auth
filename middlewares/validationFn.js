@@ -15,26 +15,26 @@ function validateUserInputsForSignUp(bodyData) {
     };
   
   
-    if (!sanitizedData.email && typeof sanitizedData.email !== 'string') {
+    if (!sanitizedData.email || typeof sanitizedData.email !== 'string') {
       errors.push('Invalid email');
     }
   
-    if (!sanitizedData.password && typeof sanitizedData.password !== 'string' && sanitizedData.password.length < 8) {
+    if (!sanitizedData.password || typeof sanitizedData.password !== 'string' || sanitizedData.password.length < 8) {
       errors.push('Invalid password and Password should be at least 8 characters');
     }
   
-    if (!sanitizedData.confirmedPassword && typeof sanitizedData.confirmedPassword !== 'string' && sanitizedData.confirmedPassword.length < 8) {
+    if (!sanitizedData.confirmedPassword || typeof sanitizedData.confirmedPassword !== 'string' || sanitizedData.confirmedPassword.length < 8) {
       errors.push('Invalid password and Password should be at least 8 characters');
     }
   
-    if (!sanitizedData.firstname && typeof sanitizedData.firstname !== 'string') {
+    if (!sanitizedData.firstname || typeof sanitizedData.firstname !== 'string') {
       errors.push('Name cannot be empty and must be of type string');
     }
   
-    if (!sanitizedData.lastname && typeof sanitizedData.lastname !== 'string') {
+    if (!sanitizedData.lastname || typeof sanitizedData.lastname !== 'string') {
       errors.push('Name cannot be empty and must be of type string');
     }
-    if (!sanitizedData.phone && typeof sanitizedData.phone !== "string") {
+    if (!sanitizedData.phone || typeof sanitizedData.phone !== "string") {
       errors.push('Phone Cannot be empty and the type is invalid');
     }
   
@@ -48,11 +48,11 @@ function validateUserInputsForSignIn (bodyData) {
       password: bodyData.password ? bodyData.password.trim().toLowerCase() : ''
     };
    
-    if (!sanitizedData.email && typeof sanitizedData.email !== 'string') {
+    if (!sanitizedData.email || typeof sanitizedData.email !== 'string') {
       errors.push('Invalid email');
     }
   
-    if (!sanitizedData.password && typeof sanitizedData.password !== 'string' && sanitizedData.password.length < 8) {
+    if (!sanitizedData.password || typeof sanitizedData.password !== 'string' || sanitizedData.password.length < 8) {
       errors.push('invalid password and Password should be at least 8 characters');
     }
   
@@ -66,7 +66,7 @@ function validateUserInputsForOtp(bodyData) {
     };
 
     
-    if (!sanitizedData.otpToken && typeof sanitizedData.otpToken !== 'string') {
+    if (!sanitizedData.otpToken || typeof sanitizedData.otpToken !== 'string') {
       errors.push('Invalid otp token');
     }
     return {errors: errors,sanitizedData: sanitizedData};
@@ -83,19 +83,19 @@ function validateUserInputsForSignUpComplete(bodyData) {
     };
   
   
-    if (!sanitizedData.country && typeof sanitizedData.country !== 'string') {
+    if (!sanitizedData.country || typeof sanitizedData.country !== 'string') {
       errors.push('Invalid country entry');
     }
   
-    if (!sanitizedData.city && typeof sanitizedData.city !== 'string') {
+    if (!sanitizedData.city || typeof sanitizedData.city !== 'string') {
       errors.push('Invalid city');
     }
   
-    if (!sanitizedData.companyName && typeof sanitizedData.companyName !== 'string') {
+    if (!sanitizedData.companyName || typeof sanitizedData.companyName !== 'string') {
       errors.push('Invalid company name or character');
     }
   
-    if (!sanitizedData.tradeType && typeof sanitizedData.tradeType !== 'string') {
+    if (!sanitizedData.tradeType || typeof sanitizedData.tradeType !== 'string') {
       errors.push('Invalid trade type or characters');
     }
 
@@ -110,11 +110,11 @@ function validateUserInputsForNewPassword (bodyData) {
       newPassword: bodyData.newPassword ? bodyData.newPassword.trim().toLowerCase() : ''
     };
    
-    if (!sanitizedData.newPassword && typeof sanitizedData.newPassword !== 'string' && sanitizedData.newPassword.length < 8) {
+    if (!sanitizedData.newPassword || typeof sanitizedData.newPassword !== 'string' || sanitizedData.newPassword.length < 8) {
       errors.push('Invalid password and Password should be at least 8 characters');
     }
   
-    if (!sanitizedData.confirmedNewPassword && typeof sanitizedData.confirmedNewPassword !== 'string' && sanitizedData.confirmedNewPassword.length < 8) {
+    if (!sanitizedData.confirmedNewPassword || typeof sanitizedData.confirmedNewPassword !== 'string' || sanitizedData.confirmedNewPassword.length < 8) {
       errors.push('Invalid password and Password should be at least 8 characters');
     }
   
