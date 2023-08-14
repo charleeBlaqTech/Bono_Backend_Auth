@@ -14,13 +14,19 @@ const validators    =require('../middlewares/validationFn');
 
 
 const homeResponse   =(req, res)=>{
-    res.status(200).json({message: "WELCOME TO BONO OIL SERVICES USER AUTHENTICATION AND AUTHORIZATION BACKEND ENDPOINTS....READ DOCS FOR ENDPOINT ROUTS NEEDED TO MAKE API CALLS..... THANKS", docsLink: "https://documenter.getpostman.com/view/27827884/2s93sXeFps"});
+
+    const message={
+        msg: "WELCOME TO BONO OIL SERVICES USER AUTHENTICATION AND AUTHORIZATION BACKEND ENDPOINTS....READ DOCS FOR ENDPOINTS NEEDED TO MAKE API CALLS..... THANKS",
+        docsLink: "https://documenter.getpostman.com/view/27827884/2s93sXeFps"
+    }
+    res.status(200).render("index",{message});
 }
 
 
 //==========LOGIN ROUTE CONTROLLER FUNCTIONs=================
 const loginPage      =(req, res)=>{
-    res.status(200).json({message: "The login page will be displayed by this route"})//render login page
+    //res.status(200).json({message: "The login page will be displayed by this route"})
+    res.status(201).render('signin', {layout: 'other'});//render login page
 }
 
 const loginUser      =async (req, res)=>{
@@ -59,7 +65,8 @@ const loginUser      =async (req, res)=>{
 
 //==================REGISTER NEW USER===================================
 const signupPage     = (req, res)=>{
-    res.status(200).json({message: "The signup form page will be displayed by this route"})//render signup page
+    //res.status(200).json({message: "The signup form page will be displayed by this route"})
+    res.status(201).render('signup', {layout: 'other'})//render signup page
 }
 const registerUser   =async(req, res)=>{ 
     try{
@@ -113,7 +120,8 @@ const registerUser   =async(req, res)=>{
 
 //=================VERIFY USER OTP=====================================
 const otpVerificationPage=(req, res)=>{
-    res.status(200).json({message:"this will be the verification page for otp"})//render otp verification page
+    //res.status(200).json({message:"this will be the verification page for otp"})
+    res.status(200).render('verify');//render otp verification page
 }
 const verifyOtp      =async (req, res)=>{
 
@@ -143,7 +151,8 @@ const verifyOtp      =async (req, res)=>{
 
 //==================NEW USER UPDATE REGISTRATION FORM===================================
 const completeRegistrationPage=(req, res)=>{
-    res.status(200).json({message:"this will be the complete signup page"})//render other user account details page
+    //res.status(200).json({message:"this will be the complete signup page"})
+    res.status(200).render('complete-rg')//render other user account details page
 }
 
 const completeRegistration=async(req, res)=>{ 
@@ -180,7 +189,8 @@ const completeRegistration=async(req, res)=>{
 
 // =================NEW PASSWORD RESET======================================
 const newPasswordPage=(req, res)=>{
-    res.status(200).json({message: "The new password form page will be displayed by this route"}) //render new password input page
+    //res.status(200).json({message: "The new password form page will be displayed by this route"})
+    res.status(200).render('new-password') //render new password input page
 }
 const resetPassword=async(req, res)=>{
     try {
