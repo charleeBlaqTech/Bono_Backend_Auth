@@ -17,18 +17,16 @@ const CheckUser= async (bodyData)=>{
 }
 
 
-const otpGenerator= async()=>{
+
+const otpGenerator= ()=>{
 
     let minNumb= 100000;
     let maxNumb= 999999;
 
-    const otp= await Math.floor(Math.random() * (maxNumb - minNumb + 1)) + minNumb;
+    const otp= Math.floor(Math.random() * (maxNumb - minNumb + 1)) + minNumb;
     return otp
 
 }
-
-
-
 
 
 

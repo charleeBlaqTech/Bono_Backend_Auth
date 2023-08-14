@@ -33,8 +33,6 @@ function validateUserInputsForSignUp(bodyData) {
 
 
 
-
-  
     if (!sanitizedData.email || typeof sanitizedData.email !== 'string') {
       errors.push('Invalid email');
     };
@@ -65,15 +63,12 @@ function validateUserInputsForSignUp(bodyData) {
       };
     };
 
-
-
   
     if (!sanitizedData.firstname || typeof sanitizedData.firstname !== 'string') {
       errors.push('Name cannot be empty and must be of type string');
     };
 
 
-  
     if (!sanitizedData.lastname || typeof sanitizedData.lastname !== 'string') {
       errors.push('Name cannot be empty and must be of type string');
     };
