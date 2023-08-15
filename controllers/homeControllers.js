@@ -58,7 +58,7 @@ const loginUser      =async (req, res)=>{
                     
                     res.cookie('auth',accessToken,{maxAge:420000, httpOnly: true, sameSite: "lax"})
                     //res.status(200).json({status: 200, message:"you have been logged in successfully"});
-                    res.status(200).render('profile');
+                    res.status(200).redirect('/customer/profile');
 
                 }else{
                     res.status(404).json({status: 404, message: "The password Entered does not match"});
