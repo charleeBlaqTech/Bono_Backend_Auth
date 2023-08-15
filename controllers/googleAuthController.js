@@ -18,10 +18,11 @@ const googleLoginCallBack= async (req, res)=>{
 
     const secret = config.get('secret_token');
     if(req.user.country && req.user.city && req.user.tradeType){
+        const currentUserDetail= req.user;
         const verifiedUserId= req.user._id;
         const accessToken= await jwt.sign(({verifiedUserId}), secret,{expiresIn: 420});         
         res.cookie('auth',accessToken,{maxAge:420000, httpOnly: true, sameSite: "lax"})
-        res.redirect('/profile');
+        res.status(200).render('profile',{currentUserDetail, loggedIn});;
     }else{
         const verifiedUserId= req.user._id;
         const accessToken= await jwt.sign(({verifiedUserId}), secret,{expiresIn: 420});         

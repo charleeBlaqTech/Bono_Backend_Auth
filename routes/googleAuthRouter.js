@@ -11,7 +11,7 @@ const authorizeUser     = require("../middlewares/authUsers")
 router.get('/google', passport.authenticate('google',{scope: ['email', 'profile']}));
 
 // ============Google AUTH CALL BACK ROUTE with user data======================================
-router.get('/google/callback', passport.authenticate('google'), googleAuthControllers.googleLoginCallBack);
+router.get('/google/callback', passport.authenticate('google',{failureRedirect: '/customer/login'}), googleAuthControllers.googleLoginCallBack);
 
 
 

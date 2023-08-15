@@ -51,7 +51,7 @@ const authPassport=(passport)=>{
     });
 
     passport.deserializeUser((id, callbackFn)=>{
-        User.findById(id, (err, user)=>{
+        User.findOne(id, (err, user)=>{
             callbackFn(err, user)
         });
     });

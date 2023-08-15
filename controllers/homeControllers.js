@@ -250,11 +250,11 @@ const resetPassword=async(req, res)=>{
 
 const userProfile= async(req, res)=>{
     try {
-        const currentUserId   = req.user? req.user._id.trim(): undefined;
-        if(!currentUserId){
+        const currentUser   = req.user;
+        if(!currentUser){
             res.status(404).redirect('/customer/login');
         }else{
-            const currentUserDetail= await User.findOne({_id:(currentUserId)});
+            const currentUserDetail= await User.findOne({email:(currentUser.email)});
             if(currentUserDetail){
                 //res.status(200).json({status:200});
                 res.status(200).render('profile',{currentUserDetail, loggedIn});
