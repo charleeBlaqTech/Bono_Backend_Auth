@@ -16,9 +16,10 @@
     box-sizing: border-box;
 }
 body{
-    font-family: 'Times New Roman', Times, serif;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background-color: var(--bgColorBody);
 }
+
 
 a{
     color: var(--link-color);
@@ -40,6 +41,13 @@ a:active{
 }
 .btn:hover{
     background-color: var(--btn-hover-color);
+}
+
+.section-mg {
+
+}
+.section-pd{
+    padding: 0 20px;
 }
 
 /* NAV BAR STYLES */
@@ -110,7 +118,7 @@ a:active{
 }
 
 
-
+/* HOME PAGE-STYLES */
 #index-page-main{
     width: 100%;
     height: 100vh; 
@@ -142,7 +150,7 @@ a:active{
 
 }
 #index-page-main>article :is(.top-section, .down-section) aside{
-   width: 65%;
+   width: 75%;
    height: 100%;
    padding: 20px;
    margin: 0 auto;
@@ -158,8 +166,8 @@ a:active{
     font-size: 28px;
 }
 .top-section>aside :is(p){
-    font-size: 1.4rem;
-    line-height: 1.2em;
+    font-size: 22px;
+   
 }
 .down-section>aside{
     color: #fff;
@@ -215,7 +223,8 @@ a:active{
 }
 #login-form p{
     color: var(--textColor2);
-    margin-top: 40px;
+    margin-top: 20px;
+    margin-bottom: 40px;
 }
 #login-form form{
     width: 50%;
@@ -263,8 +272,10 @@ a:active{
 }
 #register-form p{
     text-align: center;
-    margin: 30px auto;
     color: var(--textColor2);
+    margin-top: 20px;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
 }
 #register-form a{
     color:var(--textColor1);
@@ -300,11 +311,134 @@ a:active{
 } */
 
 
+/* USER-PROFILE-STYLES */
+
+#profile-main{
+    width: 100%;
+    height: 100vh;
+    margin-top: 80px;
+    padding: auto 30px;
+
+}
+
+.profile-section{
+    width: 100%;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+.profile-section :is(.user-profile-image-wrapper, .user-profile-details){
+    flex: 1 1 90%;
+    background-color: var(--bgColor2);
+}
+.user-profile-image-wrapper{
+    width: 45px;
+    aspect-ratio: 1/1;
+    padding: 100px;
+    border-radius: 100%;
+}
+.user-profile-details{
+    width: 400px;
+    height: 500px;
+    padding: 20px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-profile-details :is(.user-names, .user-address, .user-contact, .user-trade-type){
+    height: 55px;
+    width: 280px;
+    margin-bottom: 10px;
+    border: 2px solid var(--btn-color);
+    border-radius: 14px;
+    background-color: var(--bgColorBody);
+    transition: var(--transition);
+}
+.user-names{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.user-address{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.user-profile-details :is(.user-names, .user-address, .user-contact, .user-trade-type):hover{
+    border: 2px solid #060047;
+    border-radius: 14px;
+    background-color: var(--bgColor);
+}
+.user-profile-details>p a{
+    color: var(--btn-color);
+}
+.user-profile-details :is(.user-names, .user-address, .user-contact, .user-trade-type) p{
+    color: var(--link-color);
+    width: 100%;
+    font-size: 18px;
+    text-align: center;
+    margin: 17px auto;
+    
+}
+
+
 
 
 
 
 @media screen and (max-width:520px) {
+    #index-page-main>article{
+        flex-direction: column;
+        padding: 20px;
+    
+    }
+
+    #index-page-main>article :is(.top-section, .down-section){
+        flex: 1 1 100%;
+        height: 400px;
+     
+     }
+     #index-page-main>article :is(.top-section, .down-section) aside{
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        margin: 0 auto;
+     }
+     
+    
+     .top-section>aside :is(h2, p){
+         margin-bottom: 18px;
+     }
+     .top-section>aside :is(h2){
+         font-size: 28px;
+     }
+     /* .top-section>aside :is(p){
+         font-size: 1.4rem;
+         line-height: 1.9em;
+     } */
+    
+     .down-section>aside :is(h2, p){
+         margin-bottom: 18px;
+     }
+     .down-section>aside :is(h2){
+         font-size: 28px;
+     }
+     .down-section>aside :is(p){
+         font-size: 1.4rem;
+         line-height: 1.5em;
+     }
+     
+
+     .user-profile-details{
+        width: 300px;
+        height: 400px;
+        padding: 10px;
+    }
 
      /* login and register styles  */
      #login-form form,#register-form form{
@@ -319,6 +453,26 @@ a:active{
 }
 
 @media (max-width:599px){
+
+    #index-page-main>article{
+        flex-direction: column;
+        padding: 20px;
+    
+    }
+
+    #index-page-main>article :is(.top-section, .down-section){
+        flex: 1 1 100%;
+        height: 400px;
+     
+     }
+     #index-page-main>article :is(.top-section, .down-section) aside{
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        margin: 0 auto;
+     }
+     
+
 
     #navbar .hamburger{
         display: block;
@@ -350,6 +504,7 @@ a:active{
         align-items: center;
         gap: 1.2rem;
         padding: 35px 0 0;
+        border-radius: 16px;
     }
     .showNavMenu{
         transform: translateY(0);
@@ -359,6 +514,33 @@ a:active{
 
 
 @media (max-width:799px){
+
+    #index-page-main>article{
+        padding: 20px;
+        width: 100%;
+    }
+
+     #index-page-main>article :is(.top-section, .down-section) aside{
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        margin: 0 auto;
+     }
+     
+     .top-section>aside :is(h2, p){
+         margin-bottom: 18px;
+     }
+     .top-section>aside :is(h2){
+         font-size: 28px;
+     }
+     /* .top-section>aside :is(p){
+         font-size: 1.4rem;
+         line-height: 0.8em;
+     } */
+    
+
+
+
     #navbar .nav-menu li{
         list-style: none;
         margin-left: 25px;
@@ -381,6 +563,7 @@ a:active{
         align-items: center;
         gap: 1.6rem;
         padding: 35px 0 0;
+        border-radius: 16px;
     }
     #navbar .nav-menu .menu-exit-wrapper{
         display: block;
@@ -392,4 +575,18 @@ a:active{
         transform: translateY(0);
         transition-duration: 0.4s;
     }
+}
+
+@media (max-width:990px){
+    #index-page-main>article{
+        padding: 20px;
+        width: 100%;
+    }
+
+     #index-page-main>article :is(.top-section, .down-section) aside{
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        margin: 0 auto;
+     }
 }

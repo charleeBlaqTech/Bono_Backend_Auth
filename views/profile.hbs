@@ -1,8 +1,27 @@
-<main>
-    <section>
-        <div class="user-profile-image-wrapper">
+<main id="profile-main">
+    <section class="profile-section section-pd">
+        {{!-- <div class="user-profile-image-wrapper">
             <img src="" alt="">
-        </div>
-        
+        </div> --}}
+        <div class="user-profile-details">
+            <div class="user-names">
+                <p>{{currentUserDetail.firstname}}</p>
+                <p>{{currentUserDetail.lastname}}</p>
+            </div>
+            <div class="user-address">
+                
+                <p>{{currentUserDetail.city}}</p>
+                <p>{{currentUserDetail.country}}</p>
+                
+            </div>
+            <div class="user-contact">
+                <p>{{currentUserDetail.phone}}</p>
+            </div>
+            <div class="user-trade-type">
+                <p>{{currentUserDetail.tradeType}}</p>
+            </div>
+            <p><a href="/password/new">Do you want to change your password? click</a></p>
+            
+        </div>  
     </section>
 </main>

@@ -49,7 +49,7 @@ const loginUser      =async (req, res)=>{
                     
                     res.cookie('auth',accessToken,{maxAge:300000, httpOnly: true, sameSite: "lax"})
                     //res.status(200).json({status: 200, message:"you have been logged in successfully"});
-                    res.status(200).render('index', {loggedIn});
+                    res.status(200).render('profile');
 
                 }else{
                     res.status(404).json({status: 404, message: "The password Entered does not match"});
@@ -156,13 +156,13 @@ const verifyOtp      =async (req, res)=>{
 
 //==================NEW USER UPDATE REGISTRATION FORM===================================
 const completeRegistrationPage=(req, res)=>{
+    const loggedIn= req.user;
     //res.status(200).json({message:"this will be the complete signup page"})
-    res.status(200).render('complete-rg')//render other user account details page
+    res.status(200).render('complete-rg', {loggedIn})//render other user account details page
 }
 
 const completeRegistration=async(req, res)=>{ 
     try{
-        const loggedIn= req.user;
         const userID= (req.user? req.user.id.trim() : null || req.params.id? req.params.id.trim() : "");
         if(userID){
             const checkUserExist= await User.findById({_id:userID});
@@ -173,6 +173,7 @@ const completeRegistration=async(req, res)=>{
                     if (errors.length > 0) {
                         res.status(400).json({message: errors });
                     }else{
+                        const loggedIn= req.user;
                         checkUserExist.country      =sanitizedData.country;
                         checkUserExist.city         =sanitizedData.city;
                         checkUserExist.companyName  =sanitizedData.companyName;
@@ -196,13 +197,14 @@ const completeRegistration=async(req, res)=>{
 
 // =================NEW PASSWORD RESET======================================
 const newPasswordPage=(req, res)=>{
+    const loggedIn= req.user;
     //res.status(200).json({message: "The new password form page will be displayed by this route"})
-    res.status(200).render('new-password') //render new password input page
+    res.status(200).render('new-password', {loggedIn}) //render new password input page
 }
 const resetPassword=async(req, res)=>{
     try {
         const currentUserId   = req.user? req.user._id.trim(): undefined;
-        const userIdParams    =req.params.id? req.params.id.trim() : null;
+        const userIdParams    =req.params?.id? req.params.id.trim() : null;
         
         if(!currentUserId && !userIdParams){
             res.status(404).redirect('/customer/login');
@@ -219,7 +221,7 @@ const resetPassword=async(req, res)=>{
                         currentUserDetail.password = sanitizedData.newPassword;
                         currentUserDetail.save();
                         //res.status(200).json({status: 200, message: "password has been successfully updated"})   
-                        res.status(200).render('profile')   
+                        res.status(200).redirect('/profile')   
                     }
                 }
                 
@@ -234,13 +236,37 @@ const resetPassword=async(req, res)=>{
     }
 }
 
+
+//=======================USER PROFILE==========
+
+const userProfile= async(req, res)=>{
+    try {
+        const currentUserId   = req.user? req.user._id.trim(): undefined;
+        if(!currentUserId){
+            res.status(404).redirect('/customer/login');
+        }else{
+            const currentUserDetail= await User.findOne({_id:(currentUserId)});
+            if(currentUserDetail){
+                //res.status(200).json({status:200});
+                res.status(200).render('profile',{currentUserDetail, loggedIn});
+            }else{
+                res.status(403).json({status: 403, message: "you are not authorized"})
+            }
+            
+        }
+    } catch (error) {
+        res.status(400).json({status:400});
+    }
+}
+
 //==================LOG OUT USER========================================
 
 const logoutUser= async (req, res)=>{
     
     try {
         await res.cookie('auth', '', {maxAge: 10})
-        res.status(200).json({status:200});
+        //res.status(200).json({status:200});
+        res.status(200).redirect('/login');
     } catch (error) {
         res.status(400).json({status:400});
     }
@@ -253,7 +279,7 @@ const logoutUser= async (req, res)=>{
 
 module.exports={homeResponse,loginUser,loginPage,signupPage,newPasswordPage,registerUser,completeRegistrationPage,
                 completeRegistration,resetPassword,
-                logoutUser,otpVerificationPage,verifyOtp
+                logoutUser,otpVerificationPage,verifyOtp,userProfile
                 }
    
 
