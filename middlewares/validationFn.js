@@ -136,12 +136,11 @@ function validateUserInputsForOtp(bodyData) {
 
 function validateUserInputsForSignUpComplete(bodyData) {
     const errors = [];
-    {country, city, companyName, tradeType}
     const sanitizedData = {
-      country: bodyData.email ? bodyData.email.trim().toLowerCase(): '',
-      city: bodyData.password ? bodyData.password.trim().toLowerCase() : '',
-      companyName: bodyData.confirmedPassword ? bodyData.confirmedPassword.trim().toLowerCase(): '',
-      tradeType: bodyData.firstname ? bodyData.firstname.trim().toLowerCase() : '',
+      country: bodyData.country ? bodyData.country.trim().toLowerCase(): '',
+      city: bodyData.city ? bodyData.city.trim().toLowerCase() : '',
+      companyName: bodyData.companyName ? bodyData.companyName.trim().toLowerCase(): '',
+      tradeType: bodyData.tradeType ? bodyData.tradeType.trim().toLowerCase() : '',
     };
   
   
@@ -214,6 +213,11 @@ function validateUserInputsForNewPassword (bodyData) {
 }
 
 
+function inputAreAllNumbers(password) {
+  const phoneAreNumbers = /[0-9]/;
+  return phoneAreNumbers.test(password);
+}
+
 
 
 
@@ -242,5 +246,6 @@ module.exports={validateUserInputsForSignUpComplete,
                 validateUserInputsForSignUp,
                  validateUserInputsForSignIn, 
                   validateUserInputsForOtp,
-                  validateUserInputsForNewPassword 
+                  validateUserInputsForNewPassword ,
+                  inputAreAllNumbers
                 }

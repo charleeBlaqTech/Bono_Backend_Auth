@@ -1,12 +1,7 @@
 const express           = require("express");
 const config            = require("config")
-const mongoose          = require('mongoose');
 const exphbs            =require('express-handlebars')
-const nodeMailer        =require('nodemailer')
-const mailGunTransport  =require('nodemailer-mailgun-transport')
 const cors              = require('cors');
-const bcrypt            = require('bcrypt');
-const jwt               = require('jsonwebtoken');
 const cookieParser      = require('cookie-parser');
 const passport          = require("passport");
 require('./config/passportAuth')(passport);

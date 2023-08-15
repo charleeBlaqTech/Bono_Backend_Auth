@@ -1,32 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login System</title>
-    <link rel="stylesheet" href="/css/main.css">
-</head>
-<body>
-    <section id="header">
-    </section>
+
 
    <section id="login-form" class="section-mg section-pd">
-        {{#if ERROR}}
-            <h4>{{ERROR}}</h4>
-        {{/if}}
         <h3>LOGIN HERE</h3>
         <form action="/login" method="post">
             
-            <input type="email" name="email" id="email" required placeholder="enter your email">
+            <input type="email" name="email" id="email" required placeholder="Enter your valid email">
             <input type="password" name="password" id="password" required placeholder="Enter your password">
             <button type="submit" class="btn">Login</button>
         </form>
-        <p>have no accout?: <a href="/register">click here to register</a></p>
+        <p><button class="btn"><a href="/auth/google">login with Google</a></button></p>
+        <p>have no accout?: <a href="/signup">click here to sign-up</a></p>
    </section>
     
 
-
-    <script src="/js/scripts.js"></script>
-</body>
-</html>

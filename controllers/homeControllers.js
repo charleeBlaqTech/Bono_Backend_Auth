@@ -14,7 +14,7 @@ const validators    =require('../middlewares/validationFn');
 
 
 const homeResponse   =(req, res)=>{
-
+    
     const message={
         msg: "WELCOME TO BONO OIL SERVICES USER AUTHENTICATION AND AUTHORIZATION BACKEND ENDPOINTS....READ DOCS FOR ENDPOINTS NEEDED TO MAKE API CALLS..... THANKS",
         docsLink: "https://documenter.getpostman.com/view/27827884/2s93sXeFps"
@@ -26,7 +26,7 @@ const homeResponse   =(req, res)=>{
 //==========LOGIN ROUTE CONTROLLER FUNCTIONs=================
 const loginPage      =(req, res)=>{
     //res.status(200).json({message: "The login page will be displayed by this route"})
-    res.status(201).render('signin', {layout: 'other'});//render login page
+    res.status(201).render('signin');//render login page
 }
 
 const loginUser      =async (req, res)=>{
@@ -44,10 +44,13 @@ const loginUser      =async (req, res)=>{
                     const secret = config.get('secret_token');
 
                     const verifiedUserId=verifiedUser._id
+                    const loggedIn= verifiedUser;
                     const accessToken= await jwt.sign(({verifiedUserId}), secret,{expiresIn: 300});
                     
                     res.cookie('auth',accessToken,{maxAge:300000, httpOnly: true, sameSite: "lax"})
-                    res.status(200).json({status: 200, message:"you have been logged in successfully"})
+                    //res.status(200).json({status: 200, message:"you have been logged in successfully"});
+                    res.status(200).render('index', {loggedIn});
+
                 }else{
                     res.status(404).json({status: 404, message: "The password Entered does not match"});
                 }
@@ -66,7 +69,7 @@ const loginUser      =async (req, res)=>{
 //==================REGISTER NEW USER===================================
 const signupPage     = (req, res)=>{
     //res.status(200).json({message: "The signup form page will be displayed by this route"})
-    res.status(201).render('signup', {layout: 'other'})//render signup page
+    res.status(201).render('signup')//render signup page
 }
 const registerUser   =async(req, res)=>{ 
     try{
@@ -81,6 +84,8 @@ const registerUser   =async(req, res)=>{
                 const checkUserExist= await CheckUser(sanitizedData);
                     if(checkUserExist){
                         res.status(400).json({status:400, message: "User with this email already exist"})
+                    }else if(validators.inputAreAllNumbers(Number(sanitizedData.phone)) === false){
+                        res.status(400).json({status:400, message: "Phone Numbers Must Only Contain Numerical Values[0-9]"});
                     }else{
                         // ====generated six digit  otp ========
                         const otp = await otpGenerator();
@@ -157,6 +162,7 @@ const completeRegistrationPage=(req, res)=>{
 
 const completeRegistration=async(req, res)=>{ 
     try{
+        const loggedIn= req.user;
         const userID= (req.user? req.user.id.trim() : null || req.params.id? req.params.id.trim() : "");
         if(userID){
             const checkUserExist= await User.findById({_id:userID});
@@ -172,7 +178,8 @@ const completeRegistration=async(req, res)=>{
                         checkUserExist.companyName  =sanitizedData.companyName;
                         checkUserExist.tradeType    =sanitizedData.tradeType;
                         checkUserExist.save();
-                        res.status(200).json({status:200, message: "signup completed Successfully"});
+                        //res.status(200).json({status:200, message: "signup completed Successfully"});
+                        res.status(200).render('index', {loggedIn});
                     }
                 }
             
@@ -211,7 +218,8 @@ const resetPassword=async(req, res)=>{
                     }else{
                         currentUserDetail.password = sanitizedData.newPassword;
                         currentUserDetail.save();
-                        res.status(200).json({status: 200, message: "password has been successfully updated"})   
+                        //res.status(200).json({status: 200, message: "password has been successfully updated"})   
+                        res.status(200).render('profile')   
                     }
                 }
                 
