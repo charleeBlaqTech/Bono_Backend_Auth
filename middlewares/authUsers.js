@@ -27,7 +27,21 @@ const authorized= async (req, res, next)=>{
     }
    
 }
+const authenticateUser= async (req, res, next)=>{
+
+    const secret = config.get('secret_token');
+   if(req.cookies.auth){
+    const {verifiedUserId}= await jwt.verify(req.cookies.auth, secret);
+    const userDetails= await User.findById({_id: verifiedUserId});
+        req.user = userDetails;
+        next();
+    
+   }else{
+       next();
+    }
+   
+}
 
 
 
-module.exports=authorized
+module.exports={authorized,authenticateUser}

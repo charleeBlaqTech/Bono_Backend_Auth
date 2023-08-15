@@ -1,7 +1,7 @@
 const express           = require("express");
 const router            = express.Router();
 const homeControllers   = require('../controllers/homeControllers')
-const authorizeUser     = require("../middlewares/authUsers")
+const {authorizeUser,authenticateUser}     = require("../middlewares/authUsers")
 
 
 
@@ -13,7 +13,7 @@ const authorizeUser     = require("../middlewares/authUsers")
 
 
 //welcome note===============
-router.get('/', homeControllers.homeResponse)
+router.get('/',authenticateUser, homeControllers.homeResponse)
 
 // ============USER SIGNUP WITH FORM DATA, COOKIE-PARSER AND JWT===========
 
