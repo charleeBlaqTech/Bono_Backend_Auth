@@ -1,7 +1,8 @@
 const express           = require("express");
 const router            = express.Router();
 const homeControllers   = require('../controllers/homeControllers')
-const {authorizeUser,authenticateUser}     = require("../middlewares/authUsers")
+const authorizeUser     = require("../middlewares/authUsers");
+const authenticateUser    = require("../middlewares/authenticateUsers");
 
 
 

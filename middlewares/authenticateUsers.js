@@ -8,27 +8,21 @@ const CheckUser     = require('../config/helperFn')
 
 
 
-const authorized= async (req, res, next)=>{
+const authenticateUser= async (req, res, next)=>{
 
     const secret = config.get('secret_token');
-
    if(req.cookies.auth){
     const {verifiedUserId}= await jwt.verify(req.cookies.auth, secret);
     const userDetails= await User.findById({_id: verifiedUserId});
-        if(userDetails){
-            req.user = userDetails;
-            next()
-        }else{
-            res.status(403).json({message: "unauthorized"})
-        }
+        req.user = userDetails;
+        next();
     
    }else{
-        res.status(404).json({message: "unauthorized"})
+       next();
     }
    
 }
 
 
 
-
-module.exports=authorized
+module.exports=authenticateUser
