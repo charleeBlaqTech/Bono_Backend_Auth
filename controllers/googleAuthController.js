@@ -16,35 +16,11 @@ const sendOtpToEmail= require('../config/otpSenderFn');
 
 const googleLoginCallBack= async (req, res)=>{
 
-    
     const secret = config.get('secret_token');
-    try {
-        // if(req.user){
-        //     const currentUserDetail= req.user;
-        //     const verifiedUser= CheckUser(req.user);
-        //     if(verifiedUser){
-        //         const verifiedUserId= verifiedUser._id;
-        //         const accessToken= await jwt.sign(({verifiedUserId}), secret,{expiresIn: 420});         
-        //         res.cookie('auth',accessToken,{maxAge:420000, httpOnly: true, sameSite: "lax"});
-        //         res.status(200).redirect('/customer/profile');
-        //     }else{
-        //         const verifiedUserId= req.user._id;
-        //         const accessToken= await jwt.sign(({verifiedUserId}), secret,{expiresIn: 420});         
-        //         res.cookie('auth',accessToken,{maxAge:420000, httpOnly: true, sameSite: "lax"});
-        //         res.redirect('/customer/signup/complete');
-        //     }
-            
-        // }
-        const currentUserDetail= req.user
-        const verifiedUserId= req.user._id;
-        const accessToken= await jwt.sign(({verifiedUserId}), secret,{expiresIn: 420});         
-        res.cookie('auth',accessToken,{maxAge:420000, httpOnly: true, sameSite: "lax"});
-        res.status(200).render('/customer/profile');
-    } catch (error) {
-        console.log(error)
-        res.redirect('/customer/login');
-    }
-   
+    const verifiedUserId= req.user._id;
+    const accessToken= await jwt.sign(({verifiedUserId}), secret,{expiresIn: 420});         
+    res.cookie('auth',accessToken,{maxAge:420000, httpOnly: true, sameSite: "lax"});
+    res.status(200).redirect('/customer/profile');
     
 }
 
