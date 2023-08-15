@@ -40,7 +40,7 @@ const authPassport=(passport)=>{
                 callbackFn(null, newUser)
             }
         } catch (error) {
-            console
+            console.error(error)
         }
        
     })

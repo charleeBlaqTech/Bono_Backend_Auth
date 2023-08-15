@@ -45,9 +45,9 @@ const loginUser      =async (req, res)=>{
 
                     const verifiedUserId=verifiedUser._id
                     const loggedIn= verifiedUser;
-                    const accessToken= await jwt.sign(({verifiedUserId}), secret,{expiresIn: 300});
+                    const accessToken= await jwt.sign(({verifiedUserId}), secret,{expiresIn: 420});
                     
-                    res.cookie('auth',accessToken,{maxAge:300000, httpOnly: true, sameSite: "lax"})
+                    res.cookie('auth',accessToken,{maxAge:420000, httpOnly: true, sameSite: "lax"})
                     //res.status(200).json({status: 200, message:"you have been logged in successfully"});
                     res.status(200).render('profile');
 
@@ -180,7 +180,7 @@ const completeRegistration=async(req, res)=>{
                         checkUserExist.tradeType    =sanitizedData.tradeType;
                         checkUserExist.save();
                         //res.status(200).json({status:200, message: "signup completed Successfully"});
-                        res.status(200).render('index', {loggedIn});
+                        res.status(200).render('profile', {loggedIn});
                     }
                 }
             

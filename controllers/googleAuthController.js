@@ -15,10 +15,11 @@ const sendOtpToEmail= require('../config/otpSenderFn');
 // =================LOGIN AND REGISTER USER WITH GOOGLE OAUTH===========
 
 const googleLoginCallBack= async (req, res)=>{
+
     const secret = config.get('secret_token');
     const verifiedUserId= req.user._id;
-    const accessToken= await jwt.sign(({verifiedUserId}), secret,{expiresIn: 300});         
-    res.cookie('auth',accessToken,{maxAge:300000, httpOnly: true, sameSite: "lax"})
+    const accessToken= await jwt.sign(({verifiedUserId}), secret,{expiresIn: 420});         
+    res.cookie('auth',accessToken,{maxAge:420000, httpOnly: true, sameSite: "lax"})
     res.redirect('/customer/signup/complete');
 }
 
