@@ -14,12 +14,21 @@ const validators    =require('../middlewares/validationFn');
 
 
 const homeResponse   =(req, res)=>{
-    
-    const message={
-        msg: "WELCOME TO BONO OIL SERVICES USER AUTHENTICATION AND AUTHORIZATION BACKEND ENDPOINTS....READ DOCS FOR ENDPOINTS NEEDED TO MAKE API CALLS..... THANKS",
-        docsLink: "https://documenter.getpostman.com/view/27827884/2s93sXeFps"
+    const loggedIn= req.user;
+    if(loggedIn){
+        const message={
+            msg: "WELCOME TO BONO OIL SERVICES USER AUTHENTICATION AND AUTHORIZATION BACKEND ENDPOINTS....READ DOCS FOR ENDPOINTS NEEDED TO MAKE API CALLS..... THANKS",
+            docsLink: "https://documenter.getpostman.com/view/27827884/2s93sXeFps"
+        }
+        res.status(200).render("index",{message, loggedIn});
+    }else{
+        const message={
+            msg: "WELCOME TO BONO OIL SERVICES USER AUTHENTICATION AND AUTHORIZATION BACKEND ENDPOINTS....READ DOCS FOR ENDPOINTS NEEDED TO MAKE API CALLS..... THANKS",
+            docsLink: "https://documenter.getpostman.com/view/27827884/2s93sXeFps"
+        }
+        res.status(200).render("index",{message});
     }
-    res.status(200).render("index",{message});
+   
 }
 
 
@@ -140,13 +149,13 @@ const verifyOtp      =async (req, res)=>{
             }else{
                 const secret = config.get('secret_token');
                 const verifiedUserId= checkUserExist._id;
-                const accessToken= await jwt.sign(({verifiedUserId}), secret,{expiresIn: 300}); 
+                const accessToken= await jwt.sign(({verifiedUserId}), secret,{expiresIn: 420}); 
 
                 checkUserExist.isEmailVerified= true;
                 checkUserExist.otpToken= null;
                 checkUserExist.save();
 
-                res.cookie('auth',accessToken,{maxAge:300000, httpOnly: true, sameSite: "lax"})
+                res.cookie('auth',accessToken,{maxAge:420000, httpOnly: true, sameSite: "lax"})
                 res.status(200).redirect('/customer/signup/complete')
                 
             }
