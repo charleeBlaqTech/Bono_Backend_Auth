@@ -189,7 +189,7 @@ const completeRegistration=async(req, res)=>{
                         checkUserExist.tradeType    =sanitizedData.tradeType;
                         checkUserExist.save();
                         //res.status(200).json({status:200, message: "signup completed Successfully"});
-                        res.status(200).render('profile', {loggedIn});
+                        res.status(200).redirect('/redirect/profile');
                     }
                 }
             
