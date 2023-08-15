@@ -254,9 +254,10 @@ const userProfile= async(req, res)=>{
         if(!currentUser){
             res.status(404).redirect('/customer/login');
         }else{
-            const currentUserDetail= await User.findOne({email:(currentUser.email)});
+            const currentUserDetail= await User.findOne({email: currentUser.email});
             if(currentUserDetail){
                 //res.status(200).json({status:200});
+                const loggedIn= currentUserDetail;
                 res.status(200).render('profile',{currentUserDetail, loggedIn});
             }else{
                 res.status(403).json({status: 403, message: "you are not authorized"})

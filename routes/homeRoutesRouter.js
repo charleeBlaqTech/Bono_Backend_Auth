@@ -32,7 +32,7 @@ router.route('/signup/complete/:id?').get(authorizeUser,homeControllers.complete
 router.route('/password/new/:id?').get(authorizeUser,homeControllers.newPasswordPage).post(authorizeUser,homeControllers.resetPassword);
 
 //===================user-profile=======
-router.get('/profile', homeControllers.userProfile);
+router.get('/profile',authorizeUser, homeControllers.userProfile);
 
 // =================Get ROUTE TO LOGOUT USER=============================
 router.get('/logout',authorizeUser,homeControllers.logoutUser);
