@@ -8,8 +8,9 @@
                 <input type="text" name="lastname" id="lastname" placeholder="Last Name" required>
                 <input type="email" name="email" id="email" placeholder="Email" required>
                 <input type="text" name="phone" id="text" placeholder="Phone Number" required>
-                <input type="password" name="password" id="password" placeholder="Password" required>
-                <input type="password" name="confirmedPassword" id="confirm-password" placeholder="confirm Password" required>
+                <input type="password" name="password" id="password" class="showPassword" placeholder="Password" required>
+                <input type="password" name="confirmedPassword" id="confirm-password" class="showPassword" placeholder="confirm Password" required>
+                <h6 id="show-password" style="cursor:pointer;"><i class="fa fa-user-plus" aria-hidden="true"></i><span style="text-transform:lowercase; color:#fff; ">Show Password / Hide password</span></h6>
                 <button type="submit" class="btn">Register</button>
         </form>
         <p><button class="btn"><a href="/auth/google">Signup with Google</a></button></p>

@@ -22,7 +22,7 @@ body{
 
 
 a{
-    color: var(--link-color);
+    color: var(--textColor2);
 }
 a:active{
     color: var(--bgColor);
@@ -36,7 +36,7 @@ a:active{
     border-radius: 12px;
     margin-top: 18px;
     border: none;
-    transition: 1.7s;
+    transition: var(--transition);
     cursor: pointer;
 }
 .btn:hover{
@@ -218,7 +218,7 @@ a:active{
 
 }
 #login-form a{
-    color: #060047;
+    color: var(--textColor2);
     margin-top: 40px;
 }
 #login-form p{
@@ -278,7 +278,7 @@ a:active{
     padding-bottom: 40px;
 }
 #register-form a{
-    color:var(--textColor1);
+    color:var(--textColor2);
     margin-top: 40px;
 }
 #register-form form{
