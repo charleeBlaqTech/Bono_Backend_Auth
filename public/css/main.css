@@ -382,7 +382,6 @@ a:active{
 .user-profile-details :is(.user-names, .user-address, .user-contact, .user-trade-type) p{
     color: var(--link-color);
     width: 100%;
-    font-size: 18px;
     text-align: center;
     margin: 17px auto;
     padding: auto 14px;
@@ -449,10 +448,25 @@ p :is(span){
      
 
      .user-profile-details{
-        width: 300px;
-        height: 400px;
-        padding: 10px;
+        width: 90%;
+        height: 500px;
+        padding: 7px;
     }
+
+    .user-profile-details :is(.user-names, .user-address, .user-contact, .user-trade-type) p{
+       
+        padding: auto 5px;
+        gap: 4px;
+        box-sizing: border-box;
+    
+        
+    }
+    
+    p :is(span){
+        font-size: 13px;
+        font-weight: 300;
+    }
+    
 
      /* login and register styles  */
      #login-form form,#register-form form{
