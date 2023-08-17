@@ -448,11 +448,13 @@ p :is(span){
      
 
      .user-profile-details{
-        width: 90%;
+        width: 97%;
         height: 500px;
         padding: 7px;
     }
-
+    .user-profile-details :is(.user-names, .user-address, .user-contact, .user-trade-type){
+        width: 100%;
+    }
     .user-profile-details :is(.user-names, .user-address, .user-contact, .user-trade-type) p{
        
         padding: auto 5px;
