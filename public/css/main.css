@@ -385,10 +385,12 @@ a:active{
     font-size: 18px;
     text-align: center;
     margin: 17px auto;
+    padding: auto 14px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 7px;
+    box-sizing: border-box;
 
     
 }
