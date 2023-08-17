@@ -352,7 +352,7 @@ a:active{
 
 .user-profile-details :is(.user-names, .user-address, .user-contact, .user-trade-type){
     height: 55px;
-    width: 80%px;
+    width: 80%;
     margin-bottom: 10px;
     border: 2px solid var(--btn-color);
     border-radius: 14px;
@@ -361,13 +361,13 @@ a:active{
 }
 .user-names{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     gap: 10px;
 }
 .user-address{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     gap: 10px;
 }
@@ -386,13 +386,18 @@ a:active{
     text-align: center;
     margin: 17px auto;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 10px;
 
     
 }
 
+p :is(span){
+    font-size: 22px;
+    text-transform: capitalize;
+    font-weight: 400;
+}
 
 
 
