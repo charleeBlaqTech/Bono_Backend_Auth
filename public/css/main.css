@@ -341,8 +341,8 @@ a:active{
     border-radius: 100%;
 }
 .user-profile-details{
-    width: 400px;
-    height: 500px;
+    width: 700px;
+    height: 600px;
     padding: 20px;
     border-radius: 16px;
     display: flex;
@@ -352,7 +352,7 @@ a:active{
 
 .user-profile-details :is(.user-names, .user-address, .user-contact, .user-trade-type){
     height: 55px;
-    width: 280px;
+    width: 80%px;
     margin-bottom: 10px;
     border: 2px solid var(--btn-color);
     border-radius: 14px;
