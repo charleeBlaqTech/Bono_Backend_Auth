@@ -363,11 +363,13 @@ a:active{
     display: flex;
     justify-content: space-around;
     align-items: center;
+    gap: 10px;
 }
 .user-address{
     display: flex;
     justify-content: space-around;
     align-items: center;
+    gap: 10px;
 }
 .user-profile-details :is(.user-names, .user-address, .user-contact, .user-trade-type):hover{
     border: 2px solid #060047;
@@ -383,6 +385,11 @@ a:active{
     font-size: 18px;
     text-align: center;
     margin: 17px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
     
 }
 
