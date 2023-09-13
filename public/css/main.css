@@ -1,4 +1,33 @@
 :root{
+    --text-color-white: #fff;
+    --text-color-black: #000;
+    --color-primary: #009579;
+    --color-primary-dark: #007f67;
+    --color-secondary: #252c6a;
+    --color-error: #cc3333;
+    --color-success: #4bb544;
+    --border-radius: 14px;
+    --font-size-desktop: 26px;
+    --font-size-ipad: 22px;
+    --font-size-phone: 17px;
+    --btn-padding: 16px 32px;
+    --btn-width: 220px;
+    --btn-border-radius: 20px;
+    --transition: 1.2s ease ;
+    --transition-two: 0.3s ease-in-out;
+    --chinese-bg-color: #141412;
+    --cetacean-blue-bg-color: #0F0D35;
+    --ripo-mango-bg-color: #FDC128;
+    --xanadu-bg-color: #728A7C;
+    --deep-pink-bg-color: #F52D3A;
+    --charleston-green-bg-color: #252A36;
+    --coral-reef-bg-color: #F37F64;
+    --jungle-green-bg-color: #05564B;
+    --tulip-bg-color: #FF8787;
+    --Languid-bg-color: #D0D1E1;
+    --BRIGHT-GREY-bg-color: #EBECEF;
+    --diamond-bg-color: #B7E3FF;
+    --SAPPHIRE-bg-color: #0856CF;
     --bgColor: #b3005E;
     --bgColor2: #060047;
     --bgColorBody: #1f1f1f;
@@ -7,7 +36,7 @@
     --textColor1:#060047;
     --textColor2:#eaddcd;
     --link-color:#fff;
-    --transition: 0.3s ease-in-out
+    
 }
 
 *{
@@ -17,7 +46,7 @@
 }
 body{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-color: var(--bgColorBody);
+    background-color: var(--diamond-bg-color);
 }
 
 
@@ -30,22 +59,19 @@ a:active{
 
 .btn{
     width: 220px;
-    height: 50px;
+    padding: var(--btn-padding);
     color: #fff;
-    background-color: var(--btn-color);
+    background-color: var(--charleston-green-bg-color);
     border-radius: 12px;
     margin-top: 18px;
     border: none;
-    transition: var(--transition);
+    transition: var(--transition-two);
     cursor: pointer;
 }
 .btn:hover{
-    background-color: var(--btn-hover-color);
+    opacity: 0.4;
 }
 
-.section-mg {
-
-}
 .section-pd{
     padding: 0 20px;
 }
@@ -56,8 +82,8 @@ a:active{
     width: 95%;
     height: 70px;
     padding: 0 30px;
-    background-color:var(--bgColor2);
-    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.25);
+    background-color:var(--chinese-bg-color);
+    box-shadow: 0 0 28px;
     border-radius: 13px;
     position:fixed;
     top: 20px;
@@ -69,7 +95,7 @@ a:active{
     z-index: 999;
 }
 #navbar .fa-plane{
-    color: var(--bgColor);
+    color: var(--diamond-bg-color);
     font-size: 1.2rem;
     padding-right: 0.4rem;
 }
@@ -106,15 +132,15 @@ a:active{
 #navbar a{
     text-decoration: none;
     cursor: pointer;
-    transition: var(--transition);
+    transition: var(--transition-two);
 }
 
 #navbar a:hover{
-    color: var(--bgColor);
+    color: var(--diamond-bg-color);
 }
 
 #navbar a:active{
-    color: var(--bgColor);
+    color: var(--diamond-bg-color);
 }
 
 
@@ -122,15 +148,16 @@ a:active{
 #index-page-main{
     width: 100%;
     height: 100vh; 
-    padding-top: 18px;
+    padding-top: 40px;
     margin-top: 80px;
 }
 #index-page-main>h1{
     width: 100%;
+    margin-top: 27px;
     text-align: center;
     font-size: 28px;
     font-weight: 800;
-    color: var(--btn-color);
+    color: var(--charleston-green-bg-color);
 }
 
 #index-page-main>article{
@@ -146,7 +173,7 @@ a:active{
    flex: 1 1 50%;
    height: 400px;
    border-radius: 14px;
-   border: 3px solid orange;
+   border: 3px solid var(--chinese-bg-color);
 
 }
 #index-page-main>article :is(.top-section, .down-section) aside{
@@ -157,7 +184,7 @@ a:active{
 }
 
 .top-section>aside{
-    color: #fff;
+    color: var(--chinese-bg-color);
 }
 .top-section>aside :is(h2, p){
     margin-bottom: 18px;
@@ -170,7 +197,7 @@ a:active{
    
 }
 .down-section>aside{
-    color: #fff;
+    color: var(--chinese-bg-color);
 }
 .down-section>aside :is(h2, p){
     margin-bottom: 18px;
@@ -186,7 +213,7 @@ a:active{
 .down-section>aside :is(button){
     width: 220px;
     height: 50px;
-    background-color: var(--btn-color);
+    background-color: var(--charleston-green-bg-color);
     border-radius: 12px;
     border: none;
     transition: 1.7s;
@@ -196,7 +223,7 @@ a:active{
    color: #fff;
 }
 .down-section>aside :is(button):hover{
-    background-color: var(--btn-hover-color);
+    opacity: 0.6;
 }
 
 
@@ -208,34 +235,38 @@ a:active{
     margin-top: 80px;
 }
 #login-form h3,#login-form h4{
-    padding-bottom: 40px;
+    padding-bottom: 10px;
     padding-top: 40px;
-    color: var(--textColor2);
+    color: var(--chinese-bg-color);
 }
-#login-form h3,#login-form p,#login-form h4{
+#login-form h3,#login-form h4{
     text-align: center;
-    margin: 30px auto;
+    margin: 8px auto;
 
 }
-#login-form a{
-    color: var(--textColor2);
+#login-form p>a{
+    color: var(--chinese-bg-color);
     margin-top: 40px;
 }
 #login-form p{
-    color: var(--textColor2);
-    margin-top: 20px;
-    margin-bottom: 40px;
+    text-align: center;
+    color: var(--chinese-bg-color);
+    margin-top: 10px;
+    /* margin-bottom: 40px; */
 }
 #login-form form{
-    width: 50%;
-    padding:40px 0;
+    width: 400px;
+    max-width: 400px;
+    height: 420px;
+    padding:20px 0;
     border-radius: 20px;
     margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content:center;
-    background-color:var(--bgColor);
+    justify-content:space-between;
+    background-color:var(--Languid-bg-color);
+    box-shadow: 0 0 28px;
 }
 #login-form form input{
     width: 350px;
@@ -244,6 +275,20 @@ a:active{
     border-radius: 13px;
     text-align: center;
     font-size: 0.9em;
+}
+#login-form form .btn-wrap{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#login-form form .inputs-wrap{
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
 }
 /* #login-form form button{
     background-color: #1BBD32;
@@ -266,23 +311,25 @@ a:active{
 #register-form h3{
     text-align: center;
     margin: auto;
-    padding-bottom: 40px;
+    padding-bottom: 10px;
     padding-top: 40px;
-    color: var(--textColor2);
+    color: var(--chinese-bg-color);
 }
 #register-form p{
     text-align: center;
-    color: var(--textColor2);
-    margin-top: 20px;
-    margin-bottom: 40px;
-    padding-bottom: 40px;
+    color: var(--chinese-bg-color);
+    margin-top: 10px;
+    /* margin-bottom: 40px; */
+    /* padding-bottom: 40px; */
 }
-#register-form a{
-    color:var(--textColor2);
+#register-form p>a{
+    color:var(--chinese-bg-color);
     margin-top: 40px;
 }
 #register-form form{
-    width: 50%;
+    width: 400px;
+    max-width: 400px;
+    height: 420px;
     padding:20px 0;
     border-radius: 20px;
     margin: auto;
@@ -290,12 +337,13 @@ a:active{
     flex-direction: column;
     align-items: center;
     justify-content:center;
-    background-color: var(--bgColor);
+    background-color:var(--Languid-bg-color);
+    box-shadow: 0 0 28px;
 }
 #register-form form input{
     width: 350px;
-    height: 45px;
-    margin-bottom: 10px;
+    height: 50px;
+    margin-bottom: 7px;
     border-radius: 13px;
     text-align: center;
     font-size: 0.9em;
@@ -332,7 +380,7 @@ a:active{
 }
 .profile-section :is(.user-profile-image-wrapper, .user-profile-details){
     flex: 1 1 90%;
-    background-color: var(--bgColor2);
+    background-color: var(--charleston-green-bg-color);
 }
 .user-profile-image-wrapper{
     width: 45px;
@@ -354,10 +402,10 @@ a:active{
     height: 55px;
     width: 80%;
     margin-bottom: 10px;
-    border: 2px solid var(--btn-color);
+    border: 2px solid var(--charleston-green-bg-color);
     border-radius: 14px;
-    background-color: var(--bgColorBody);
-    transition: var(--transition);
+    background-color: var(--Languid-bg-color);
+    transition: var(--transition-two);
 }
 .user-names{
     display: flex;
@@ -372,15 +420,15 @@ a:active{
     gap: 10px;
 }
 .user-profile-details :is(.user-names, .user-address, .user-contact, .user-trade-type):hover{
-    border: 2px solid #060047;
+    border: 2px solid var(--charleston-green-bg-color);
     border-radius: 14px;
-    background-color: var(--bgColor);
+    background-color: var(--Languid-bg-color);
 }
 .user-profile-details>p a{
-    color: var(--btn-color);
+    color: var(--BRIGHT-GREY-bg-color);
 }
 .user-profile-details :is(.user-names, .user-address, .user-contact, .user-trade-type) p{
-    color: var(--link-color);
+    color: var(--chinese-bg-color);
     width: 100%;
     text-align: center;
     margin: 17px auto;
@@ -482,7 +530,7 @@ p :is(span){
     
 }
 
-@media (max-width:599px){
+@media (max-width:680px){
 
     #index-page-main>article{
         flex-direction: column;
@@ -522,7 +570,7 @@ p :is(span){
     }
 
     .nav-menu{
-        background-color: var(--bgColor);
+        background-color: var(--charleston-green-bg-color);
         position:fixed;
         top: 0;
         left:0;
@@ -581,7 +629,7 @@ p :is(span){
         font-size: 1.5rem;
     }
     .nav-menu{
-        background-color: var(--bgColor);
+        background-color: var(--charleston-green-bg-color);
         position:fixed;
         top: 0;
         left:0;
