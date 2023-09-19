@@ -47,6 +47,7 @@
 body{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background-color: var(--diamond-bg-color);
+    font-size: 65%;
 }
 
 
@@ -274,7 +275,7 @@ a:active{
     margin-bottom: 10px;
     border-radius: 13px;
     text-align: center;
-    font-size: 0.9em;
+    font-size: 1em;
 }
 #login-form form .btn-wrap{
     width: 100%;
@@ -346,7 +347,7 @@ a:active{
     margin-bottom: 7px;
     border-radius: 13px;
     text-align: center;
-    font-size: 0.9em;
+    font-size: 1em;
 }
 /* #register-form form button{
     background-color: #1BBD32;
@@ -526,6 +527,7 @@ p :is(span){
     }
     #register-form form input, #login-form form input{
         width: 100%;
+        font-size: 16px;
     }
     
 }
