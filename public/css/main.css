@@ -7,12 +7,12 @@
     --color-error: #cc3333;
     --color-success: #4bb544;
     --border-radius: 14px;
-    --font-size-desktop: 26px;
-    --font-size-ipad: 22px;
-    --font-size-phone: 17px;
-    --btn-padding: 16px 32px;
+    --font-size-desktop: 16px;
+    --font-size-ipad:1rem;
+    --font-size-phone: 1rem;
+    --btn-padding: 1rem 2rem;
     --btn-width: 220px;
-    --btn-border-radius: 20px;
+    --btn-border-radius: 1rem;
     --transition: 1.2s ease ;
     --transition-two: 0.3s ease-in-out;
     --chinese-bg-color: #141412;
@@ -63,7 +63,7 @@ a:active{
     padding: var(--btn-padding);
     color: #fff;
     background-color: var(--charleston-green-bg-color);
-    border-radius: 12px;
+    border-radius: var(--btn-border-radius);
     margin-top: 18px;
     border: none;
     transition: var(--transition-two);
