@@ -556,6 +556,7 @@ p :is(span){
 
     #navbar .hamburger{
         display: block;
+        color: var(--BRIGHT-GREY-bg-color)
     }
    
     #navbar .nav-menu li{
@@ -572,7 +573,7 @@ p :is(span){
     }
 
     .nav-menu{
-        background-color: var(--charleston-green-bg-color);
+        background-color: var(--Languid-bg-color);
         position:fixed;
         top: 0;
         left:0;
@@ -631,7 +632,7 @@ p :is(span){
         font-size: 1.5rem;
     }
     .nav-menu{
-        background-color: var(--charleston-green-bg-color);
+        background-color: var(--Languid-bg-color);
         position:fixed;
         top: 0;
         left:0;
